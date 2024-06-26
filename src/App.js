@@ -1,12 +1,21 @@
 import './App.css';
 
-import NonPlayableCharacters from './components/NonPlayableCharacters'
+import List from './components/List'
 
 function App() {
     return (
         <div className="App">
             <h1>Mythic GME</h1>
-            <NonPlayableCharacters />
+            <List
+                title="NPC List"
+                inputLabel="New NPC"
+                confirmationMessage="Are you sure you want to clear the entire NPC list?"
+            />
+            <List
+                title="Thread List"
+                inputLabel="New Thread"
+                confirmationMessage="Are you sure you want to clear the entire Thread list?"
+            />
         </div>
     );
 }
