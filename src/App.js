@@ -1,5 +1,6 @@
 import './App.css';
 
+import DiceRoller from './components/DiceRoller'
 import List from './components/List'
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
                 inputLabel="New Thread"
                 confirmationMessage="Are you sure you want to clear the entire Thread list?"
             />
+            <DiceRoller />
         </div>
     );
 }
