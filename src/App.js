@@ -15,17 +15,29 @@ function App() {
     }
 
     // TODO: Receive a modifier to sum at the end
-    // TODO: How to deal with advantages and disadvantages?
-    function roll(selectedDices, from="") {
+    function roll(selectedDices, from="", adv=false, dadv=false) {
 
         var {rolled, newMessages} = selectedDices.reduce((acc, dice) => {
             if (dice.qnt > 0) {
-                var rolled = getRandomInt(dice.qnt, (dice.faces * dice.qnt))
+                var rolls = [...Array(dice.qnt).keys()].map((_) => {return getRandomInt(1, dice.faces)})
+                var rolled = 0
+                var msg = ""
+
+                if (adv) {
+                    rolled = Math.max(...rolls)
+                    msg = rolls.map((roll) => `1${dice.name}kh=${roll}`).join(", ")
+                } else if (dadv) {
+                    rolled = Math.min(...rolls)
+                    msg = rolls.map((roll) => `1${dice.name}kl=${roll}`).join(", ")
+                } else {
+                    rolled = rolls.reduce((acc, n) => {return acc + n}, 0)
+                    msg = `${dice.qnt}${dice.name}`
+                }
 
                 return {
                     ...acc,
                     rolled: acc.rolled + rolled,
-                    newMessages: [...acc.newMessages, `${dice.qnt}${dice.name}`]
+                    newMessages: [...acc.newMessages, msg]
                 }
             } else {
                 return acc
