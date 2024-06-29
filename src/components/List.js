@@ -38,6 +38,10 @@ export default function List(props) {
         if (window.confirm(props.confirmationMessage)) clearItems()
     }
 
+    function handleClearSelected(){
+        setSelected("")
+    }
+
     function ItemLists() {
         return(
             items.map(item => (
@@ -63,9 +67,9 @@ export default function List(props) {
                 <label>{props.inputLabel}: <input type="text" /></label>
                 <input type="submit" value="Create" />
             </form>
-            <button onClick={handleClearItems}>Clear the list</button>
-            <button onClick={handleRoll}>Roll</button>
-            {selected !== "" && <p><strong>Rolled for:</strong> {selected}</p>}
+            {items.length > 0 && <button onClick={handleClearItems}>Clear the list</button>}
+            {items.length > 0 && <button onClick={handleRoll}>Roll</button>}
+            {selected !== "" && <div><p><strong>Rolled for:</strong> {selected}</p><button onClick={handleClearSelected}>Clear rolled</button></div>}
         </div>
     )
 }
