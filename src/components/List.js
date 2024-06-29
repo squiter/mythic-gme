@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 export default function List(props) {
     const [items, setItems] = useState([])
+    const [selected, setSelected] = useState("")
 
     function lastId() {
         var sorted = items.sort((first, second) => first.id - second.id)
@@ -45,6 +46,13 @@ export default function List(props) {
         )
     }
 
+    function handleRoll() {
+        var qnt = items.length
+        var rolled = props.roll([{qnt: 1, faces: qnt, name: `d${qnt}`}], props.title)
+
+        setSelected(items[rolled-1].content)
+    }
+
     return(
         <div className="items">
             <h2>{props.title}</h2>
@@ -55,9 +63,9 @@ export default function List(props) {
                 <label>{props.inputLabel}: <input type="text" /></label>
                 <input type="submit" value="Create" />
             </form>
-            <form onSubmit={handleClearItems}>
-                <input type="submit" value="Clear the list" />
-            </form>
+            <button onClick={handleClearItems}>Clear the list</button>
+            <button onClick={handleRoll}>Roll</button>
+            {selected !== "" && <p><strong>Rolled for:</strong> {selected}</p>}
         </div>
     )
 }

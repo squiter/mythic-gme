@@ -1,18 +1,9 @@
 import { useState } from 'react'
 
-import DiceTray from './DiceTray'
+import dices from '../data/dices'
 
-export default function DiceRoller() {
-    const dices = [
-        {name: "d4", faces: 4, qnt: 0},
-        {name: "d6", faces: 6, qnt: 0},
-        {name: "d8", faces: 8, qnt: 0},
-        {name: "d10", faces: 10, qnt: 0},
-        {name: "d12", faces: 12, qnt: 0},
-        {name: "d20", faces: 20, qnt: 0}
-    ]
+export default function DiceRoller({roll, messages}) {
     const [selectedDices, setSeletectedDices] = useState(dices)
-    const [messages, setMessages] = useState([])
 
     function addDice(dice_name) {
         setSeletectedDices(prev => {
@@ -26,39 +17,20 @@ export default function DiceRoller() {
         })
     }
 
-    function getRandomInt(min, max) {
-        var cmin = Math.ceil(min)
-        var fmax = Math.floor(max)
-        return Math.floor(Math.random() * (fmax - cmin + 1)) + cmin
-    }
-
-    // TODO: Receive a modifier to sum at the end
-    // TODO: How to deal with advantages and disadvantages?
-    // TODO: Maybe this function should receive the selectedDices and be moved to App
-    function roll() {
-
-        var {rolled, newMessages} = selectedDices.reduce((acc, dice) => {
-            if (dice.qnt > 0) {
-                var rolled = getRandomInt(dice.qnt, (dice.faces * dice.qnt))
-
-                return {
-                    ...acc,
-                    rolled: acc.rolled + rolled,
-                    newMessages: [...acc.newMessages, `${dice.qnt}${dice.name}`]
-                }
-            } else {
-                return acc
-            }
-        }, {rolled: 0, newMessages: []})
-
-        rolled > 0 && setMessages(oldMessages => ([...oldMessages, `[${newMessages.join(" + ")}] Rolled: ${rolled}`]))
+    function rollAndClear() {
+        roll(selectedDices)
         setSeletectedDices(dices)
     }
 
     return (
         <div className="dices">
-            <h2>Dices</h2>
-            <DiceTray dices={selectedDices} addDice={addDice} roll={roll} />
+            <div className="dice-tray">
+                <h2>Dices</h2>
+                <ul>
+                    {selectedDices.map((dice) => <li key={dice.name} onClick={() => addDice(dice.name)}>{dice.name}: {dice.qnt}</li>)}
+                </ul>
+                <button onClick={rollAndClear}>Roll</button>
+            </div>
             <div className="rolling-logs">
                 <h3>Rolling Logs</h3>
                 <ul>{messages.map((msg, i) => <li key={i}>{msg}</li>)}</ul>
