@@ -49,7 +49,7 @@ export default function List(props) {
         <div className="items">
             <h2>{props.title}</h2>
             <div>
-                {items.length > 0 && <ul><ItemLists /></ul>}
+                {items.length > 0 && <ol><ItemLists /></ol>}
             </div>
             <form onSubmit={handleNewItem}>
                 <label>{props.inputLabel}: <input type="text" /></label>
