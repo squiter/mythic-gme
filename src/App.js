@@ -3,6 +3,7 @@ import './App.css';
 import {useState} from 'react'
 
 import DiceRoller from './components/DiceRoller'
+import FateChart from './components/FateChart'
 import List from './components/List'
 
 function App() {
@@ -66,6 +67,7 @@ function App() {
                 confirmationMessage="Are you sure you want to clear the entire Thread list?"
                 roll={roll}
             />
+            <FateChart getRandomInt={getRandomInt}/>
             <DiceRoller roll={roll} messages={messages} />
         </div>
     );
