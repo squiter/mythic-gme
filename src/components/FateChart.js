@@ -28,7 +28,7 @@ export default function FateChart({getRandomInt, addMessage, triggerRandomEvent}
         var fateTripple = fateChart.find((line) => line.odd === currentOdd).by_chaos[chaosFactor - 1]
 
         if ((first === second) && first <= chaosFactor) {
-            triggerRandomEvent()
+            triggerRandomEvent("Fate Chart [Random Event]")
         }
 
         var result = ""

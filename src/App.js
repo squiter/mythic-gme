@@ -5,9 +5,11 @@ import {useState} from 'react'
 import DiceRoller from './components/DiceRoller'
 import FateChart from './components/FateChart'
 import List from './components/List'
+import randomEventFocus from './data/randomEventFocus'
 
 function App() {
     const [messages, setMessages] = useState([])
+    const [currentRandomEvent, setCurrentRandomEvent] = useState({})
 
     function addMessage(message) {
         setMessages((prev) => [...prev, message])
@@ -56,6 +58,15 @@ function App() {
         return rolled
     }
 
+    function triggerRandomEvent(from) {
+        var rolled = getRandomInt(1, 100)
+        var event = randomEventFocus.find((line) => {
+            return (rolled >= line.range[0] && rolled <= line.range[1])
+        })
+        addMessage(`${from} (${event.result}) - [1d100] Rolled: ${rolled}`)
+        setCurrentRandomEvent(event)
+    }
+
     return (
         <div className="App">
             <h1>Mythic GME</h1>
@@ -71,7 +82,12 @@ function App() {
                 confirmationMessage="Are you sure you want to clear the entire Thread list?"
                 roll={roll}
             />
-            <FateChart getRandomInt={getRandomInt} addMessage={addMessage}/>
+            <FateChart
+                getRandomInt={getRandomInt}
+                addMessage={addMessage}
+                triggerRandomEvent={triggerRandomEvent}
+            />
+            {currentRandomEvent !== {} && <div className="random-event"><p><strong>Event: {currentRandomEvent.result}</strong></p></div>}
             <DiceRoller roll={roll} messages={messages} />
         </div>
     );
