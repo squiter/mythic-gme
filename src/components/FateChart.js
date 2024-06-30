@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import fateChart from '../data/fateChart'
 
-export default function FateChart({getRandomInt}) {
+export default function FateChart({getRandomInt, addMessage, triggerRandomEvent}) {
     const [chaosFactor, setChaosFactor] = useState(5)
     const [currentOdd, setCurrentOdd] = useState("50/50")
     const [currentFate, setCurrentFate] = useState("")
@@ -27,15 +27,22 @@ export default function FateChart({getRandomInt}) {
         console.log(currentOdd, chaosFactor, first, second, total)
         var fateTripple = fateChart.find((line) => line.odd === currentOdd).by_chaos[chaosFactor - 1]
 
-        if (total <= fateTripple[0]) {
-            setCurrentFate("Extremely Yes")
-        } else if (total <= fateTripple[1]){
-            setCurrentFate("Yes")
-        } else if (total < fateTripple[2]){
-            setCurrentFate("No")
-        } else {
-            setCurrentFate("Extremely No")
+        if ((first === second) && first <= chaosFactor) {
+            triggerRandomEvent()
         }
+
+        var result = ""
+        if (total <= fateTripple[0]) {
+            result = "Extremely Yes"
+        } else if (total <= fateTripple[1]){
+            result = "Yes"
+        } else if (total < fateTripple[2]){
+            result = "No"
+        } else {
+            result = "Extremely No"
+        }
+        setCurrentFate(result)
+        addMessage(`Fate Chart (${result})- [1d10=${first}, 1d10=${second}] Rolled: ${total}`)
     }
 
     return (

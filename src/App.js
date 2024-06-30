@@ -9,6 +9,10 @@ import List from './components/List'
 function App() {
     const [messages, setMessages] = useState([])
 
+    function addMessage(message) {
+        setMessages((prev) => [...prev, message])
+    }
+
     function getRandomInt(min, max) {
         var cmin = Math.ceil(min)
         var fmax = Math.floor(max)
@@ -67,7 +71,7 @@ function App() {
                 confirmationMessage="Are you sure you want to clear the entire Thread list?"
                 roll={roll}
             />
-            <FateChart getRandomInt={getRandomInt}/>
+            <FateChart getRandomInt={getRandomInt} addMessage={addMessage}/>
             <DiceRoller roll={roll} messages={messages} />
         </div>
     );
