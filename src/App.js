@@ -5,11 +5,15 @@ import {useState} from 'react'
 import DiceRoller from './components/DiceRoller'
 import FateChart from './components/FateChart'
 import List from './components/List'
+import meaningTable from './data/meaningTable'
+import RandomEvent from './components/RandomEvent'
 import randomEventFocus from './data/randomEventFocus'
+
 
 function App() {
     const [messages, setMessages] = useState([])
     const [currentRandomEvent, setCurrentRandomEvent] = useState({})
+    const [currentMeaningPair, setCurrentMeaningPair] = useState([])
 
     function addMessage(message) {
         setMessages((prev) => [...prev, message])
@@ -67,6 +71,19 @@ function App() {
         setCurrentRandomEvent(event)
     }
 
+    function rollMeaningTable() {
+        var firstRoll = getRandomInt(1, 100)
+        var actionTable = getRandomInt(1,2) === 1 ? meaningTable.actions1 : meaningTable.actions2
+        var selectedAction = actionTable[firstRoll-1]
+        addMessage(`MeaningTable (${selectedAction}) - [1d100] Rolled: ${firstRoll}`)
+        var secondRoll = getRandomInt(1, 100)
+        var descriptorTable = getRandomInt(1,2) === 1 ? meaningTable.descriptors1 : meaningTable.descriptors2
+        var selectedDescriptor = descriptorTable[secondRoll-1]
+        addMessage(`MeaningTable (${selectedDescriptor}) - [1d100] Rolled: ${secondRoll}`)
+
+        setCurrentMeaningPair([selectedAction, selectedDescriptor])
+    }
+
     return (
         <div className="App">
             <h1>Mythic GME</h1>
@@ -87,7 +104,11 @@ function App() {
                 addMessage={addMessage}
                 triggerRandomEvent={triggerRandomEvent}
             />
-            {currentRandomEvent !== {} && <div className="random-event"><p><strong>Event: {currentRandomEvent.result}</strong></p></div>}
+            {Object.keys(currentRandomEvent).length !== 0 && <RandomEvent
+                currentRandomEvent={currentRandomEvent}
+                currentMeaningPair={currentMeaningPair}
+                rollMeaningTable={rollMeaningTable}
+            />}
             <DiceRoller roll={roll} messages={messages} />
         </div>
     );
