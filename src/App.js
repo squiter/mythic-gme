@@ -13,7 +13,7 @@ import randomEventFocus from './data/randomEventFocus'
 function App() {
     const [messages, setMessages] = useState([])
     const [currentRandomEvent, setCurrentRandomEvent] = useState({})
-    const [currentMeaningPair, setCurrentMeaningPair] = useState([])
+    const [currentActionMeaningPair, setCurrentActionMeaningPair] = useState([])
 
     function addMessage(message) {
         setMessages((prev) => [...prev, message])
@@ -71,17 +71,16 @@ function App() {
         setCurrentRandomEvent(event)
     }
 
-    function rollMeaningTable() {
+    function rollActionMeaningTable() {
         var firstRoll = getRandomInt(1, 100)
-        var actionTable = getRandomInt(1,2) === 1 ? meaningTable.actions1 : meaningTable.actions2
-        var selectedAction = actionTable[firstRoll-1]
-        addMessage(`MeaningTable (${selectedAction}) - [1d100] Rolled: ${firstRoll}`)
-        var secondRoll = getRandomInt(1, 100)
-        var descriptorTable = getRandomInt(1,2) === 1 ? meaningTable.descriptors1 : meaningTable.descriptors2
-        var selectedDescriptor = descriptorTable[secondRoll-1]
-        addMessage(`MeaningTable (${selectedDescriptor}) - [1d100] Rolled: ${secondRoll}`)
+        var selectedAction1 = meaningTable.actions1[firstRoll-1]
+        addMessage(`MeaningTable (${selectedAction1}) - [1d100] Rolled: ${firstRoll}`)
 
-        setCurrentMeaningPair([selectedAction, selectedDescriptor])
+        var secondRoll = getRandomInt(1, 100)
+        var selectedAction2 = meaningTable.actions2[secondRoll-1]
+        addMessage(`MeaningTable (${selectedAction2}) - [1d100] Rolled: ${secondRoll}`)
+
+        setCurrentActionMeaningPair([selectedAction1, selectedAction2])
     }
 
     return (
@@ -106,8 +105,8 @@ function App() {
             />
             {Object.keys(currentRandomEvent).length !== 0 && <RandomEvent
                 currentRandomEvent={currentRandomEvent}
-                currentMeaningPair={currentMeaningPair}
-                rollMeaningTable={rollMeaningTable}
+                currentMeaningPair={currentActionMeaningPair}
+                rollMeaningTable={rollActionMeaningTable}
             />}
             <DiceRoller roll={roll} messages={messages} />
         </div>
