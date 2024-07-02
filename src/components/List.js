@@ -1,8 +1,12 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function List(props) {
-    const [items, setItems] = useState([])
+    const [items, setItems] = useState(
+        () => JSON.parse(localStorage.getItem(props.title)) || []
+    )
     const [selected, setSelected] = useState("")
+
+    useEffect(() => (localStorage.setItem(props.title, JSON.stringify(items))), [items])
 
     function lastId() {
         var sorted = items.sort((first, second) => first.id - second.id)
