@@ -1,5 +1,5 @@
 // TODO: locations, characters and objects has 99, 101 and 97 items each!
-const meaningTable = {
+const coreMeaningTable = {
     actions1: [
         "Abandon",
         "Accompany",
@@ -717,4 +717,4 @@ const meaningTable = {
         "Worn"
     ]
 }
-export default meaningTable
+export default coreMeaningTable
