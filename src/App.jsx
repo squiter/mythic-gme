@@ -5,6 +5,7 @@ import {useState} from 'react'
 import DiceRoller from './components/DiceRoller'
 import FateChart from './components/FateChart'
 import List from './components/List'
+import MeaningPair from './components/MeaningPair'
 import meaningTable from './data/meaningTable'
 import RandomEvent from './components/RandomEvent'
 import randomEventFocus from './data/randomEventFocus'
@@ -14,6 +15,7 @@ function App() {
     const [messages, setMessages] = useState([])
     const [currentRandomEvent, setCurrentRandomEvent] = useState({})
     const [currentActionMeaningPair, setCurrentActionMeaningPair] = useState([])
+    const [currentDescriptorMeaningPair, setCurrentDescriptorMeaningPair] = useState([])
 
     function addMessage(message) {
         setMessages((prev) => [...prev, message])
@@ -74,13 +76,25 @@ function App() {
     function rollActionMeaningTable() {
         var firstRoll = getRandomInt(1, 100)
         var selectedAction1 = meaningTable.actions1[firstRoll-1]
-        addMessage(`MeaningTable (${selectedAction1}) - [1d100] Rolled: ${firstRoll}`)
+        addMessage(`ActionMeaningTable (${selectedAction1}) - [1d100] Rolled: ${firstRoll}`)
 
         var secondRoll = getRandomInt(1, 100)
         var selectedAction2 = meaningTable.actions2[secondRoll-1]
-        addMessage(`MeaningTable (${selectedAction2}) - [1d100] Rolled: ${secondRoll}`)
+        addMessage(`ActionMeaningTable (${selectedAction2}) - [1d100] Rolled: ${secondRoll}`)
 
         setCurrentActionMeaningPair([selectedAction1, selectedAction2])
+    }
+
+    function rollDescriptorMeaningTable() {
+        var firstRoll = getRandomInt(1, 100)
+        var selectedDescriptor1 = meaningTable.descriptors1[firstRoll-1]
+        addMessage(`DescriptorMeaningTable (${selectedDescriptor1}) - [1d100] Rolled: ${firstRoll}`)
+
+        var secondRoll = getRandomInt(1, 100)
+        var selectedDescriptor2 = meaningTable.descriptors2[secondRoll-1]
+        addMessage(`DescriptorMeaningTable (${selectedDescriptor2}) - [1d100] Rolled: ${secondRoll}`)
+
+        setCurrentDescriptorMeaningPair([selectedDescriptor1, selectedDescriptor2])
     }
 
     return (
@@ -104,10 +118,15 @@ function App() {
                 triggerRandomEvent={triggerRandomEvent}
             />
             {Object.keys(currentRandomEvent).length !== 0 && <RandomEvent
-                currentRandomEvent={currentRandomEvent}
-                currentMeaningPair={currentActionMeaningPair}
-                rollMeaningTable={rollActionMeaningTable}
-            />}
+                                                                 currentRandomEvent={currentRandomEvent}
+                                                                 currentMeaningPair={currentActionMeaningPair}
+                                                                 rollMeaningTable={rollActionMeaningTable}
+                                                             />}
+            <MeaningPair
+                meaningTableType="Descriptor"
+                rollMeaningTable={rollDescriptorMeaningTable}
+                currentMeaningPair={currentDescriptorMeaningPair}
+            />
             <DiceRoller roll={roll} messages={messages} />
         </div>
     );
