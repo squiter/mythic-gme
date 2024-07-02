@@ -56,19 +56,19 @@ export default function List(props) {
 
     function handleRoll() {
         var qnt = items.length
-        var rolled = props.roll([{qnt: 1, faces: qnt, name: `d${qnt}`}], props.title)
+        var rolled = props.roll([{qnt: 1, faces: qnt, name: `d${qnt}`}], `${props.title} List`)
 
         setSelected(items[rolled-1].content)
     }
 
     return(
         <div className="items">
-            <h2>{props.title}</h2>
+            <h2>{props.title} List</h2>
             <div>
                 {items.length > 0 && <ol><ItemLists /></ol>}
             </div>
             <form onSubmit={handleNewItem}>
-                <label>{props.inputLabel}: <input type="text" /></label>
+                <label>New {props.title}: <input type="text" /></label>
                 <input type="submit" value="Create" />
             </form>
             {items.length > 0 && <button onClick={handleClearItems}>Clear the list</button>}

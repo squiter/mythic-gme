@@ -101,14 +101,12 @@ function App() {
         <div className="App">
             <h1>Mythic GME</h1>
             <List
-                title="NPC List"
-                inputLabel="New NPC"
+                title="Characters"
                 confirmationMessage="Are you sure you want to clear the entire NPC list?"
                 roll={roll}
             />
             <List
-                title="Thread List"
-                inputLabel="New Thread"
+                title="Threads"
                 confirmationMessage="Are you sure you want to clear the entire Thread list?"
                 roll={roll}
             />
