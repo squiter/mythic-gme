@@ -6,7 +6,7 @@ export default function List(props) {
     )
     const [selected, setSelected] = useState("")
 
-    useEffect(() => (localStorage.setItem(props.title, JSON.stringify(items))), [items])
+    useEffect(() => (localStorage.setItem(props.title, JSON.stringify(items))), [items, props.title])
 
     function lastId() {
         var sorted = items.sort((first, second) => first.id - second.id)
@@ -49,7 +49,7 @@ export default function List(props) {
     function ItemLists() {
         return(
             items.map(item => (
-                <li key={item.id}>{item.content} <button onClick={() => deleteItem(item.id)}>X</button></li>
+                <li key={item.id}>{item.content} <button className="close" onClick={() => deleteItem(item.id)}>X</button></li>
             ))
         )
     }
@@ -73,7 +73,12 @@ export default function List(props) {
             </form>
             {items.length > 0 && <button onClick={handleClearItems}>Clear the list</button>}
             {items.length > 0 && <button onClick={handleRoll}>Roll</button>}
-            {selected !== "" && <div><p><strong>Rolled for:</strong> {selected}</p><button onClick={handleClearSelected}>Clear rolled</button></div>}
+            {selected !== "" && (
+                <div className="roll-result">
+                    <p><strong>Rolled for:</strong> {selected}</p>
+                    <button className="close" onClick={handleClearSelected}>X</button>
+                </div>
+            )}
         </div>
     )
 }

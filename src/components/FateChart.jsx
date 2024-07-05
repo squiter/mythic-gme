@@ -20,6 +20,10 @@ export default function FateChart({getRandomInt, addMessage, triggerRandomEvent}
         setCurrentOdd(value)
     }
 
+    function handleClearSelected(){
+        setCurrentFate("")
+    }
+
     function rollFate() {
         var first = getRandomInt(0, 9)
         var second = getRandomInt(0, 9)
@@ -77,12 +81,12 @@ export default function FateChart({getRandomInt, addMessage, triggerRandomEvent}
                 </div>
             </div>
             <button onClick={rollFate}>Roll fate</button>
-            {currentFate !== "" && <p><strong>{currentFate}</strong></p>}
+            {currentFate !== "" && (
+                <div className="roll-result">
+                    <p><strong>{currentFate}</strong></p>
+                    <button className="close" onClick={handleClearSelected}>X</button>
+                </div>
+            )}
         </div>
     )
 }
-
-
-
-// TODO: Check if we have something better then filter
-// chart.filter((line) => (line.odd == selectedOdd))[0][chaosFactor - 1] // => [x,y,z]

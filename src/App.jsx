@@ -17,7 +17,6 @@ function App() {
     const [currentActionMeaningPair, setCurrentActionMeaningPair] = useState([])
     const [currentDescriptorMeaningPair, setCurrentDescriptorMeaningPair] = useState([])
 
-    // TODO: messages = {title, rolls, result}
     function addMessage(title, rolls, result) {
         var date = new Date().toISOString()
         setMessages((prev) => [...prev, {title: title, rolls: rolls, result: result, createdAt: date}])
@@ -126,11 +125,22 @@ function App() {
                                                                          currentMeaningPair={currentActionMeaningPair}
                                                                          rollMeaningTable={rollActionMeaningTable}
                                                                      />}
-                    <MeaningPair
-                        meaningTableType="Descriptor"
-                        rollMeaningTable={rollDescriptorMeaningTable}
-                        currentMeaningPair={currentDescriptorMeaningPair}
-                    />
+                    <div className="meaning-pairs">
+                        <h2>Meaning Pair Tables</h2>
+                        <MeaningPair
+                            meaningTableType="Descriptor"
+                            rollMeaningTable={rollDescriptorMeaningTable}
+                            currentMeaningPair={currentDescriptorMeaningPair}
+                            clearMeaningPair={() => setCurrentDescriptorMeaningPair([])}
+                        />
+
+                        <MeaningPair
+                            meaningTableType="Action"
+                            rollMeaningTable={rollActionMeaningTable}
+                            currentMeaningPair={currentActionMeaningPair}
+                            clearMeaningPair={() => setCurrentActionMeaningPair([])}
+                        />
+                    </div>
                 </div>
                 <div className="right-sidebar">
                     <DiceRoller roll={roll} messages={messages} />

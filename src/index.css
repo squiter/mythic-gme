@@ -19,7 +19,7 @@ code {
   --black-color: #0B0A09;
   --yellow-color: #E7EB9E;
   --red-color: #AB4571;
-  --dar-red-color: #84356A;
+  --dark-red-color: #84356A;
   --orange-color: #C05E4C;
   --dark-orange-color: #8E3D47;
   --green-color: #418F5F;
@@ -63,10 +63,13 @@ button, input[type=submit] {
   padding: 5px 12px;
   font-weight: bold;
   cursor: pointer;
+  font-size: 16px;
 }
 
+button.close { font-size: 12px }
+
 button:hover { background-color: var(--bright-blue-color) }
-input[type=submit] { background-color: var(--dark-green-color) }
+input[type=submit] { background-color: var(--dark-green-color); font-size: 12px }
 input[type=submit]:hover { background-color: var(--green-color) }
 
 label { font-weight: bold }
@@ -86,7 +89,7 @@ label { font-weight: bold }
 
 .items li:hover { background-color: var(--bg-box) }
 
-.items li button { background-color: var(--dar-red-color) }
+.items li button { background-color: var(--dark-red-color) }
 .items li button:hover { background-color: var(--red-color) }
 
 
@@ -164,7 +167,7 @@ main {
   font-size: 20px;
   background-color: white;
 }
-.chaos-factor .buttons .increase { background-color: var(--dar-red-color); color: white; }
+.chaos-factor .buttons .increase { background-color: var(--dark-red-color); color: white; }
 .chaos-factor .buttons .increase:hover { background-color: var(--red-color); color: white; }
 .chaos-factor .buttons .decrease { background-color: var(--dark-green-color); color: white; }
 .chaos-factor .buttons .decrease:hover { background-color: var(--green-color); color: white; }
@@ -198,7 +201,7 @@ main {
 .dice-tray .dices .d100 { mask: url("../public/images/d100black.svg") no-repeat center 5px; }
 
 .rolling-logs {
-  height: 500px;
+  max-height: 500px;
   display: flex;
   flex-direction: column;
 }
@@ -243,3 +246,21 @@ main {
   font-weight: bold;
   padding: 5px;
 }
+
+.roll-result {
+  background-color: var(--green-color);
+  border-radius: 12px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 1px;
+}
+
+.roll-result p {
+  margin: 0px 0px;
+  line-height: 34px;
+  padding-left: 10px
+}
+
+.roll-result button {background-color: var(--dark-red-color);}
+.roll-result button:hover {background-color: var(--red-color);}
