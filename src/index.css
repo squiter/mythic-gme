@@ -196,3 +196,12 @@ main {
 .dice-tray .dices .d12 { mask: url("../public/images/d12black.svg") no-repeat center; }
 .dice-tray .dices .d20 { mask: url("../public/images/d20black.svg") no-repeat center; }
 .dice-tray .dices .d100 { mask: url("../public/images/d100black.svg") no-repeat center 5px; }
+
+.rolling-logs ul{
+  margin: -10px 0px 10px;
+  padding: 0px;
+}
+
+.rolling-logs li{
+  list-style: none;
+}

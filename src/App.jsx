@@ -17,8 +17,9 @@ function App() {
     const [currentActionMeaningPair, setCurrentActionMeaningPair] = useState([])
     const [currentDescriptorMeaningPair, setCurrentDescriptorMeaningPair] = useState([])
 
-    function addMessage(message) {
-        setMessages((prev) => [...prev, message])
+    // TODO: messages = {title, rolls, result}
+    function addMessage(title, rolls, result) {
+        setMessages((prev) => [...prev, {title: title, rolls: rolls, result: result}])
     }
 
     function getRandomInt(min, max) {
@@ -28,59 +29,56 @@ function App() {
     }
 
     // TODO: Receive a modifier to sum at the end
-    function roll(selectedDices, from="", adv=false, dadv=false) {
+    function roll(selectedDices, title, adv=false, dadv=false) {
 
-        var {rolled, newMessages} = selectedDices.reduce((acc, dice) => {
+        var {rolled, newRollMessages} = selectedDices.reduce((acc, dice) => {
             if (dice.qnt > 0) {
                 var rolls = [...Array(dice.qnt).keys()].map((_) => {return getRandomInt(1, dice.faces)})
                 var rolled = 0
-                var msg = ""
+                var rollMessage = ""
 
                 if (adv) {
                     rolled = Math.max(...rolls)
-                    msg = rolls.map((roll) => `1${dice.name}kh=${roll}`).join(", ")
+                    rollMessage = rolls.map((roll) => `1${dice.name}kh=${roll}`).join(", ")
                 } else if (dadv) {
                     rolled = Math.min(...rolls)
-                    msg = rolls.map((roll) => `1${dice.name}kl=${roll}`).join(", ")
+                    rollMessage = rolls.map((roll) => `1${dice.name}kl=${roll}`).join(", ")
                 } else {
                     rolled = rolls.reduce((acc, n) => {return acc + n}, 0)
-                    msg = `${dice.qnt}${dice.name}`
+                    rollMessage = `${dice.qnt}${dice.name}`
                 }
 
                 return {
                     ...acc,
                     rolled: acc.rolled + rolled,
-                    newMessages: [...acc.newMessages, msg]
+                    newRollMessages: [...acc.newRollMessages, rollMessage]
                 }
             } else {
                 return acc
             }
-        }, {rolled: 0, newMessages: []})
+        }, {rolled: 0, newRollMessages: []})
 
-        var baseMessage = `[${newMessages.join(" + ")}] Rolled: ${rolled}`
-        var message = from !== "" ? `${from} - ${baseMessage}` : baseMessage
-
-        rolled > 0 && setMessages(oldMessages => ([...oldMessages, message]))
+        rolled > 0 && addMessage(title, newRollMessages.join(" + "), rolled)
         return rolled
     }
 
-    function triggerRandomEvent(from) {
+    function triggerRandomEvent(title) {
         var rolled = getRandomInt(1, 100)
         var event = randomEventFocus.find((line) => {
             return (rolled >= line.range[0] && rolled <= line.range[1])
         })
-        addMessage(`${from} (${event.result}) - [1d100] Rolled: ${rolled}`)
+        addMessage(title, "1d100", `${rolled} - ${event.result}`)
         setCurrentRandomEvent(event)
     }
 
     function rollActionMeaningTable() {
         var firstRoll = getRandomInt(1, 100)
         var selectedAction1 = coreMeaningTable.actions1[firstRoll-1]
-        addMessage(`ActionMeaningTable (${selectedAction1}) - [1d100] Rolled: ${firstRoll}`)
+        addMessage("Action Meaning Table", "1d100", `${firstRoll} - ${selectedAction1}`)
 
         var secondRoll = getRandomInt(1, 100)
         var selectedAction2 = coreMeaningTable.actions2[secondRoll-1]
-        addMessage(`ActionMeaningTable (${selectedAction2}) - [1d100] Rolled: ${secondRoll}`)
+        addMessage("Action Meaning Table", "1d100", `${secondRoll} - ${selectedAction2}`)
 
         setCurrentActionMeaningPair([selectedAction1, selectedAction2])
     }
@@ -88,11 +86,11 @@ function App() {
     function rollDescriptorMeaningTable() {
         var firstRoll = getRandomInt(1, 100)
         var selectedDescriptor1 = coreMeaningTable.descriptors1[firstRoll-1]
-        addMessage(`DescriptorMeaningTable (${selectedDescriptor1}) - [1d100] Rolled: ${firstRoll}`)
+        addMessage("Descriptor Meaning Table", "1d100", `${firstRoll} - ${selectedDescriptor1}`)
 
         var secondRoll = getRandomInt(1, 100)
         var selectedDescriptor2 = coreMeaningTable.descriptors2[secondRoll-1]
-        addMessage(`DescriptorMeaningTable (${selectedDescriptor2}) - [1d100] Rolled: ${secondRoll}`)
+        addMessage("Descriptor Meaning Table", "1d100", `${secondRoll} - ${selectedDescriptor2}`)
 
         setCurrentDescriptorMeaningPair([selectedDescriptor1, selectedDescriptor2])
     }

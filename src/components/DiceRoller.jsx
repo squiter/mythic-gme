@@ -6,6 +6,18 @@ export default function DiceRoller({roll, messages}) {
     const [selectedDices, setSeletectedDices] = useState(dices)
     const [formData, setFormData] = useState({rollType: "normal"})
 
+    function buildMessageElem({title, rolls, result}) {
+        return (
+            <div className="msg">
+                <h3>{title}</h3>
+                <div className="rolls">{rolls}</div>
+                <div className="result">{result}</div>
+            </div>
+        )
+    }
+
+
+
     function handleChange(event) {
         const {name, value} = event.target
         setFormData(prev => {
@@ -37,7 +49,7 @@ export default function DiceRoller({roll, messages}) {
         }else if(formData.rollType === "isDadv") {
             rollType =[false, true]
         }
-        roll(selectedDices, "", ...rollType)
+        roll(selectedDices, "Manual Dices", ...rollType)
         setSeletectedDices(dices)
     }
 
@@ -89,8 +101,8 @@ export default function DiceRoller({roll, messages}) {
                 <button onClick={rollAndClear}>Roll</button>
             </div>
             <div className="rolling-logs">
-                <h3>Rolling Logs</h3>
-                <ul>{messages.map((msg, i) => <li key={i}>{msg}</li>)}</ul>
+                <h2>Rolling Logs</h2>
+                <ul>{messages.map((msg, i) => <li key={i}>{buildMessageElem(msg)}</li>)}</ul>
                 <small>kh = keep highest, kl = keep = lowest</small>
             </div>
         </div>

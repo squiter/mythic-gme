@@ -27,10 +27,6 @@ export default function FateChart({getRandomInt, addMessage, triggerRandomEvent}
         console.log(currentOdd, chaosFactor, first, second, total)
         var fateTripple = fateChart.find((line) => line.odd === currentOdd).by_chaos[chaosFactor - 1]
 
-        if ((first === second) && first <= chaosFactor) {
-            triggerRandomEvent("Fate Chart [Random Event]")
-        }
-
         var result = ""
         if (total <= fateTripple[0]) {
             result = "Extremely Yes"
@@ -42,7 +38,11 @@ export default function FateChart({getRandomInt, addMessage, triggerRandomEvent}
             result = "Extremely No"
         }
         setCurrentFate(result)
-        addMessage(`Fate Chart (${result})- [1d10=${first}, 1d10=${second}] Rolled: ${total}`)
+        addMessage("Fate Chart", `1d10=${first}, 1d10=${second}`, `${total} - ${result}`)
+
+        if ((first === second) && first <= chaosFactor) {
+            triggerRandomEvent("Fate Chart [Random Event]")
+        }
     }
 
     return (
