@@ -55,25 +55,27 @@ export default function FateChart({getRandomInt, addMessage, triggerRandomEvent}
                     <div className="change increase" onClick={increaseChaosFactor}>+</div>
                 </div>
             </div>
-            <fieldset>
-                <legend>Odds</legend>
-                {fateChart.map((line) => {
-                    return(
-                        <div key={`d-${line.odd}`}>
-                            <input
-                                type="radio"
-                                key={line.odd}
-                                id={line.odd}
-                                value={line.odd}
-                                checked={currentOdd === line.odd}
-                                onChange={handleChange}
-                                name="odds"
-                            />
-                            <label key={`l-${line.odd}`} htmlFor={line.odd}>{line.odd}</label>
-                        </div>
-                    )
-                })}
-            </fieldset>
+            <div className="radios-wrapper">
+                <h3>Odds</h3>
+                <div className="radios">
+                    {fateChart.map((line) => {
+                        return(
+                            <div key={`d-${line.odd}`}>
+                                <input
+                                    type="radio"
+                                    key={line.odd}
+                                    id={line.odd}
+                                    value={line.odd}
+                                    checked={currentOdd === line.odd}
+                                    onChange={handleChange}
+                                    name="odds"
+                                />
+                                <label key={`l-${line.odd}`} htmlFor={line.odd}>{line.odd}</label>
+                            </div>
+                        )
+                    })}
+                </div>
+            </div>
             <button onClick={rollFate}>Roll fate</button>
             {currentFate !== "" && <p><strong>{currentFate}</strong></p>}
         </div>

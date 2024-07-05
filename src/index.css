@@ -12,8 +12,102 @@ code {
   monospace;
 }
 
+:root {
+  --blue-color: #2E5479;
+  --bright-blue-color: #4C6B8B;
+  --purple-color: #2F3066;
+  --black-color: #0B0A09;
+  --yellow-color: #E7EB9E;
+  --red-color: #AB4571;
+  --dar-red-color: #84356A;
+  --orange-color: #C05E4C;
+  --dark-orange-color: #8E3D47;
+  --green-color: #418F5F;
+  --dark-green-color: #4C6152;
+  --title-box: #4A3748;
+  --bg-box: #E3DEDD;
+  --main-title: #2F3066;
+}
+
 .app { width: 100%; }
-h1 { text-align: center; }
+
+header {
+  background-color: var(--main-title);
+  display: block;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: white;
+  margin: 0px;
+}
+
+h2 {
+  color: white;
+  background-color: var(--main-title);
+  padding: 2px 10px;
+}
+
+input[type=text] {
+  margin-right: 5px
+}
+
+button, input[type=submit] {
+  background: var(--blue-color);
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  border: 0px;
+  margin: 5px 5px 5px 0px;
+  padding: 5px 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover { background-color: var(--bright-blue-color) }
+input[type=submit] { background-color: var(--dark-green-color) }
+input[type=submit]:hover { background-color: var(--green-color) }
+
+label { font-weight: bold }
+
+.items ol {
+  padding-left: 0px;
+  margin-top: -10px;
+  border-bottom: 1px solid var(--black-color)
+}
+
+.items li {
+  display: flex;
+  line-height: 34px;
+  justify-content: space-between;
+  padding-left: 10px;
+}
+
+.items li:hover { background-color: var(--bg-box) }
+
+.items li button { background-color: var(--dar-red-color) }
+.items li button:hover { background-color: var(--red-color) }
+
+
+.radios-wrapper {
+  background-color: var(--bg-box);
+  border: 0px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.radios-wrapper .radios {
+  padding: 5px;
+}
+
+.radios-wrapper h3 {
+  background-color: var(--title-box);
+  color: white;
+  margin: 0px;
+  display: block;
+  padding: 5px 10px;
+}
 
 main {
   display: flex;
@@ -70,6 +164,10 @@ main {
   font-size: 20px;
   background-color: white;
 }
+.chaos-factor .buttons .increase { background-color: var(--dar-red-color); color: white; }
+.chaos-factor .buttons .increase:hover { background-color: var(--red-color); color: white; }
+.chaos-factor .buttons .decrease { background-color: var(--dark-green-color); color: white; }
+.chaos-factor .buttons .decrease:hover { background-color: var(--green-color); color: white; }
 
 .dice-tray .dices {
   margin: 0px;
@@ -86,13 +184,15 @@ main {
   color: white;
   font-weight: bold;
   font-size: 25px;
-  text-shadow: 0px 0px 4px cyan, 0px 0px 4px cyan;
+  text-shadow: 0px 0px 4px var(--orange-color), 0px 0px 4px var(--orange-color);
   cursor: pointer;
 }
-.dice-tray .dices .d4 { background: url("../public/images/d4black.svg") no-repeat center; }
-.dice-tray .dices .d6 { background: url("../public/images/d6black.svg") no-repeat center; }
-.dice-tray .dices .d8 { background: url("../public/images/d8black.svg") no-repeat center; }
-.dice-tray .dices .d10 { background: url("../public/images/d10black.svg") no-repeat center; }
-.dice-tray .dices .d12 { background: url("../public/images/d12black.svg") no-repeat center; }
-.dice-tray .dices .d20 { background: url("../public/images/d20black.svg") no-repeat center; }
-.dice-tray .dices .d100 { background: url("../public/images/d100black.svg") no-repeat center; }
+.dice-tray .dices li { background-color: var(--blue-color) }
+.dice-tray .dices .selected { background-color: var(--green-color) }
+.dice-tray .dices .d4 { mask: url("../public/images/d4black.svg") no-repeat center; }
+.dice-tray .dices .d6 { mask: url("../public/images/d6black.svg") no-repeat center; }
+.dice-tray .dices .d8 { mask: url("../public/images/d8black.svg") no-repeat center; }
+.dice-tray .dices .d10 { mask: url("../public/images/d10black.svg") no-repeat center; }
+.dice-tray .dices .d12 { mask: url("../public/images/d12black.svg") no-repeat center; }
+.dice-tray .dices .d20 { mask: url("../public/images/d20black.svg") no-repeat center; }
+.dice-tray .dices .d100 { mask: url("../public/images/d100black.svg") no-repeat center 5px; }

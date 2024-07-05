@@ -48,42 +48,44 @@ export default function DiceRoller({roll, messages}) {
                 <ul className="dices">
                     {selectedDices.map((dice) => <li
                                                      key={dice.name}
-                                                     className={dice.name}
+                                                     className={dice.qnt > 0 ? `${dice.name} selected` : dice.name}
                                                      onClick={() => addDice(dice.name)}
                                                  >
                                                      {dice.qnt}
                                                  </li>)}
                 </ul>
-                <fieldset>
-                    <legend>Roll type</legend>
-                    <input
-                        type="radio"
-                        id="normal"
-                        value="normal"
-                        checked={formData.rollType === "normal"}
-                        onChange={handleChange}
-                        name="rollType"
-                    />
-                    <label htmlFor="normal">Normal</label>
-                    <input
-                        type="radio"
-                        id="isAdv"
-                        value="isAdv"
-                        checked={formData.rollType === "isAdv"}
-                        onChange={handleChange}
-                        name="rollType"
-                    />
-                    <label htmlFor="isAdv">Advantage</label>
-                    <input
-                        type="radio"
-                        id="isDadv"
-                        value="isDadv"
-                        checked={formData.rollType === "isDadv"}
-                        onChange={handleChange}
-                        name="rollType"
-                    />
-                    <label htmlFor="isDadv">Disadvantage</label>
-                </fieldset>
+                <div className="radios-wrapper">
+                    <h3>Roll type</h3>
+                    <div className="radios">
+                        <input
+                            type="radio"
+                            id="normal"
+                            value="normal"
+                            checked={formData.rollType === "normal"}
+                            onChange={handleChange}
+                            name="rollType"
+                        />
+                        <label htmlFor="normal">Normal</label>
+                        <input
+                            type="radio"
+                            id="isAdv"
+                            value="isAdv"
+                            checked={formData.rollType === "isAdv"}
+                            onChange={handleChange}
+                            name="rollType"
+                        />
+                        <label htmlFor="isAdv">Advantage</label>
+                        <input
+                            type="radio"
+                            id="isDadv"
+                            value="isDadv"
+                            checked={formData.rollType === "isDadv"}
+                            onChange={handleChange}
+                            name="rollType"
+                        />
+                        <label htmlFor="isDadv">Disadvantage</label>
+                    </div>
+                </div>
                 <button onClick={rollAndClear}>Roll</button>
             </div>
             <div className="rolling-logs">
