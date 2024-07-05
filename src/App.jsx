@@ -146,6 +146,7 @@ function App() {
                     <DiceRoller roll={roll} messages={messages} />
                 </div>
             </main>
+            <footer>Developed by <a href="https://github.com/squiter" target="_blank" rel="noreferrer">@squiter</a> based on the excelent book <a href="https://www.drivethrurpg.com/en/product/422929/Mythic-Game-Master-Emulator-Second-Edition" target="_blank" rel="noreferrer">Mythic Game Master Emulator Second Edition</a>.</footer>
         </div>
     );
 }
