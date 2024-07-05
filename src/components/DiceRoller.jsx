@@ -45,8 +45,14 @@ export default function DiceRoller({roll, messages}) {
         <div className="dices">
             <div className="dice-tray">
                 <h2>Dices</h2>
-                <ul>
-                    {selectedDices.map((dice) => <li key={dice.name} onClick={() => addDice(dice.name)}>{dice.name}: {dice.qnt}</li>)}
+                <ul className="dices">
+                    {selectedDices.map((dice) => <li
+                                                     key={dice.name}
+                                                     className={dice.name}
+                                                     onClick={() => addDice(dice.name)}
+                                                 >
+                                                     {dice.qnt}
+                                                 </li>)}
                 </ul>
                 <fieldset>
                     <legend>Roll type</legend>

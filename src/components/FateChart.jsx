@@ -49,9 +49,11 @@ export default function FateChart({getRandomInt, addMessage, triggerRandomEvent}
         <div className="fate-chart">
             <h2>Fate Chart</h2>
             <div className="chaos-factor">
-                <div>{chaosFactor}</div>
-                <div className="decrease" onClick={decreaseChaosFactor}>-</div>
-                <div className="increase" onClick={increaseChaosFactor}>+</div>
+                <div className="indicator"><span className="number">{chaosFactor}</span></div>
+                <div className="buttons">
+                    <div className="change decrease" onClick={decreaseChaosFactor}>-</div>
+                    <div className="change increase" onClick={increaseChaosFactor}>+</div>
+                </div>
             </div>
             <fieldset>
                 <legend>Odds</legend>

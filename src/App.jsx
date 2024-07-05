@@ -99,33 +99,43 @@ function App() {
 
     return (
         <div className="App">
-            <h1>Mythic GME</h1>
-            <List
-                title="Characters"
-                confirmationMessage="Are you sure you want to clear the entire NPC list?"
-                roll={roll}
-            />
-            <List
-                title="Threads"
-                confirmationMessage="Are you sure you want to clear the entire Thread list?"
-                roll={roll}
-            />
-            <FateChart
-                getRandomInt={getRandomInt}
-                addMessage={addMessage}
-                triggerRandomEvent={triggerRandomEvent}
-            />
-            {Object.keys(currentRandomEvent).length !== 0 && <RandomEvent
-                                                                 currentRandomEvent={currentRandomEvent}
-                                                                 currentMeaningPair={currentActionMeaningPair}
-                                                                 rollMeaningTable={rollActionMeaningTable}
-                                                             />}
-            <MeaningPair
-                meaningTableType="Descriptor"
-                rollMeaningTable={rollDescriptorMeaningTable}
-                currentMeaningPair={currentDescriptorMeaningPair}
-            />
-            <DiceRoller roll={roll} messages={messages} />
+            <header>
+                <h1>Mythic GME</h1>
+            </header>
+            <main>
+                <div className="left-sidebar">
+                    <List
+                        title="Characters"
+                        confirmationMessage="Are you sure you want to clear the entire NPC list?"
+                        roll={roll}
+                    />
+                    <List
+                        title="Threads"
+                        confirmationMessage="Are you sure you want to clear the entire Thread list?"
+                        roll={roll}
+                    />
+                </div>
+                <div className="center">
+                    <FateChart
+                        getRandomInt={getRandomInt}
+                        addMessage={addMessage}
+                        triggerRandomEvent={triggerRandomEvent}
+                    />
+                    {Object.keys(currentRandomEvent).length !== 0 && <RandomEvent
+                                                                         currentRandomEvent={currentRandomEvent}
+                                                                         currentMeaningPair={currentActionMeaningPair}
+                                                                         rollMeaningTable={rollActionMeaningTable}
+                                                                     />}
+                    <MeaningPair
+                        meaningTableType="Descriptor"
+                        rollMeaningTable={rollDescriptorMeaningTable}
+                        currentMeaningPair={currentDescriptorMeaningPair}
+                    />
+                </div>
+                <div className="right-sidebar">
+                    <DiceRoller roll={roll} messages={messages} />
+                </div>
+            </main>
         </div>
     );
 }
