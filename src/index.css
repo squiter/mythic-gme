@@ -197,11 +197,49 @@ main {
 .dice-tray .dices .d20 { mask: url("../public/images/d20black.svg") no-repeat center; }
 .dice-tray .dices .d100 { mask: url("../public/images/d100black.svg") no-repeat center 5px; }
 
+.rolling-logs {
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+.rolling-logs .log-wrapper {
+  margin-top: -10px;
+  flex: 1;
+  overflow: auto;
+}
+
 .rolling-logs ul{
-  margin: -10px 0px 10px;
+  margin: 10px 0px 10px;
   padding: 0px;
+  display: flex;
+  flex-direction: column-reverse
 }
 
 .rolling-logs li{
   list-style: none;
+}
+
+.rolling-logs .msg {
+  background-color: var(--bg-box);
+  margin-bottom: 4px;
+}
+
+.rolling-logs h3 {
+  background-color: var(--title-box);
+  color: white;
+  margin: 0px;
+  padding: 2px 4px;
+}
+
+.rolling-logs .rolls {
+  text-align: center;
+  padding: 4px;
+  font-size: 14px;
+}
+
+.rolling-logs .result {
+  text-align: center;
+  font-weight: bold;
+  padding: 5px;
 }

@@ -19,7 +19,8 @@ function App() {
 
     // TODO: messages = {title, rolls, result}
     function addMessage(title, rolls, result) {
-        setMessages((prev) => [...prev, {title: title, rolls: rolls, result: result}])
+        var date = new Date().toISOString()
+        setMessages((prev) => [...prev, {title: title, rolls: rolls, result: result, createdAt: date}])
     }
 
     function getRandomInt(min, max) {
@@ -29,6 +30,7 @@ function App() {
     }
 
     // TODO: Receive a modifier to sum at the end
+    // TODO: Maybe I should split the message set in other function, because Lists can't add the result to the log because it doesn't know yet
     function roll(selectedDices, title, adv=false, dadv=false) {
 
         var {rolled, newRollMessages} = selectedDices.reduce((acc, dice) => {
