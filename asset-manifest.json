@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/mythic-gme/static/css/main.48c73565.css",
-    "main.js": "/mythic-gme/static/js/main.1c3ee892.js",
+    "main.css": "/mythic-gme/static/css/main.3c5a21cb.css",
+    "main.js": "/mythic-gme/static/js/main.73226454.js",
     "static/js/453.88d65174.chunk.js": "/mythic-gme/static/js/453.88d65174.chunk.js",
     "static/media/d100black.svg": "/mythic-gme/static/media/d100black.2f14342ba1df4f62a5a7.svg",
     "static/media/d20black.svg": "/mythic-gme/static/media/d20black.f8a2f3576a8988d93b7e.svg",
@@ -11,12 +11,12 @@
     "static/media/d8black.svg": "/mythic-gme/static/media/d8black.c3af6fb2cf1c9386ada0.svg",
     "static/media/d4black.svg": "/mythic-gme/static/media/d4black.51eda212c0df4ed3997a.svg",
     "static/media/d6black.svg": "/mythic-gme/static/media/d6black.9ef5a09b3c27e60046b7.svg",
-    "main.48c73565.css.map": "/mythic-gme/static/css/main.48c73565.css.map",
-    "main.1c3ee892.js.map": "/mythic-gme/static/js/main.1c3ee892.js.map",
+    "main.3c5a21cb.css.map": "/mythic-gme/static/css/main.3c5a21cb.css.map",
+    "main.73226454.js.map": "/mythic-gme/static/js/main.73226454.js.map",
     "453.88d65174.chunk.js.map": "/mythic-gme/static/js/453.88d65174.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.48c73565.css",
-    "static/js/main.1c3ee892.js"
+    "static/css/main.3c5a21cb.css",
+    "static/js/main.73226454.js"
   ]
 }
