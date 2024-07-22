@@ -32,12 +32,22 @@ code {
 .App {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   width: 100%;
   marging: 0;
   min-height: 100vh
 }
 
-main { flex: 1; min-height: 100% }
+main {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-height: 100%;
+  gap: 25px;
+  padding: 25px;
+}
+
 
 header {
   background-color: var(--main-title);
@@ -132,13 +142,6 @@ label { font-weight: bold }
   margin: 0px;
   display: block;
   padding: 5px 10px;
-}
-
-main {
-  display: flex;
-  gap: 25px;
-  justify-content: space-between;
-  padding: 25px;
 }
 
 .center {
